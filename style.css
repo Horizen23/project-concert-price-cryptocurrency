@@ -51,7 +51,7 @@ textarea:focus, input:focus{
     outline: none;
 }
 
-.rep>p {
+.rep>div {
     color: #6bb3b3;
     height: 60px;
     margin-top: 0;
