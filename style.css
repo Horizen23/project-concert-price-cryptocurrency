@@ -1,0 +1,70 @@
+.form{
+    border-left: 8px solid #9999ff;
+    height: 530px;
+    width: 900px;
+    margin: 9em auto;
+    padding: 2em;
+    background-color: #fdfdff;
+    border-radius: 0.5em;
+    box-shadow: 2px 3px 7px 2px rgb(0 0 0 / 2%);
+    display: flex;
+    flex-direction: column;
+}
+body {
+    background-color: #f0f0f2;
+    margin: 0;
+    padding: 0;
+}
+input{
+
+    width: 400px;
+    height: 50px;
+    border-radius: 10px;
+    padding: 0 30px;
+
+    border: 1px solid #bb99ff;
+}
+.rep{
+    height: 300px;
+}
+h1{
+    margin-bottom: 40px;
+    color: #6b7db3;
+    border-bottom: 1px solid #dfd7d7;
+    height: 60px;
+    font-size: 30px;
+    font-weight: 100;
+}
+.flex{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    height: auto;
+    justify-content: space-between;
+    width: 700px
+}
+.ee{
+    border: 1px solid #ecdada6b;
+    border-radius: 10px
+}
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.rep>p {
+    color: #6bb3b3;
+    height: 60px;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    /* border: 1px solid; */
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background: #efefef61;
+    font-size: 20px;
+}
+
+
+.ccrypto_s{
+    display: unset;
+}

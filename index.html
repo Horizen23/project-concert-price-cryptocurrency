@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำนวนราคา</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form">
+        <div class="rep">
+             <h1>แปลงสกุลเงิน Cryptocurrency to Baht</h1>
+             <p class="a">0 Bitcoin </p>
+             <p class="b">0 บาท</p>
+        </div>
+        <div class="inputcryto flex">
+            <input id="cryto" type="number" >
+            <div class="dropdown">
+                <button class="btn  dropdown-toggle ee" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  <p class="ccrypto_s" id="BTC">Bitcoin</p> 
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><a class="dropdown-item ea" id="ETH" href="#">Ethereum</a></li>
+                  <li><a class="dropdown-item ea" id="BAND" href="#">Band</a></li>
+                  <li><a class="dropdown-item ea" id="DOGE" href="#">Dogecoin</a></li>
+                  <li><a class="dropdown-item ea" id="DOT" href="#">DOT</a></li>
+                  <li><a class="dropdown-item ea" id="LINK" href="#">LINK</a></li>
+                </ul>
+              </div>
+        </div>
+        <div class="inpubaht flex">
+            <input id="baht" type="number" >
+            <p>บาท</p>
+        </div>
+  
+    </div>
+    <script>
+        $(document).ready(function(){
+            $("input#cryto").keydown(function(){
+              convert_cryto()
+            });
+            $(".ea").click(function() {
+                  $(".ccrypto_s").text($(this).text())
+                  $(".ccrypto_s").attr("id",$(this).attr('id') );
+                  convert_cryto()
+            });
+            $("input#baht").keydown(function(){
+              convert_baht()
+            });
+    
+  });
+  
+  const convert_cryto = () =>{
+    $.ajax({url: "https://api.binance.com/api/v3/avgPrice?symbol="+$(".ccrypto_s").attr("id")+"USDT", success: function(result){
+                  var  input =  $( "input#cryto" ).val();
+                  var  sume = (result.price * $( "input#cryto" ).val()*30.01).toFixed(2);//เนือกจาก Api ราคาจาก bitkubกำลังแก้ไชยุเลยขออ้างอิงราคา USDT To baht ณ วันที่ 6/2/2564
+                  const answer = input<= 0 ?0 + " "+$(".ccrypto_s").text():input + " "+$(".ccrypto_s").text()
+                  $(".rep>p.a").text(answer)
+                  const numberString = String(sume).replace(
+                      /^\d+/,
+                      number => [...number].map(
+                          (digit, index, digits) => (
+                              !index || (digits.length - index) % 3 ? '' : ','
+                          ) + digit
+                      ).join('')
+                  );
+                  $(".rep>p.b").text(numberString+" บาท")
+                  $( "input#baht" ).val(sume)
+              }});
+  }
+
+  const convert_baht = () =>{
+    $.ajax({url: "https://api.binance.com/api/v3/avgPrice?symbol="+$(".ccrypto_s").attr("id")+"USDT", success: function(result){
+                  var  input =  $( "input#baht" ).val();  
+                  var  sume = ( (input/30.01)/result.price).toFixed(8);//เนือกจาก Api ราคาจาก bitkubกำลังแก้ไชยุเลยขออ้างอิงราคา USDT To baht ณ วันที่ 6/2/2564
+                  const answer = sume<= 0 ?0 + " "+$(".ccrypto_s").text():sume + " "+$(".ccrypto_s").text()
+                  $(".rep>p.a").text(answer)
+                  $( "input#cryto" ).val(sume)
+                  const numberString = String(input).replace(
+                      /^\d+/,
+                      number => [...number].map(
+                          (digit, index, digits) => (
+                              !index || (digits.length - index) % 3 ? '' : ','
+                          ) + digit
+                      ).join('')
+                  );
+                  $(".rep>p.b").text(numberString+" บาท")
+              }});
+  }
+  
+      </script>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>
